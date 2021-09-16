@@ -1,5 +1,5 @@
 //Nicholas Heil 242628
-//Determine if adult or child based on birthday from text file.
+//Draw a histogram based on numeric inputs from a file read by the program
 
 #include <iostream>
 #include <string>
@@ -9,32 +9,37 @@ using namespace std;
 
 int main()
 { 
-  //Gather input and setup
-  string file, junk;
-  int adult, children, m, d, y;
-  m = 0, d = 0, y = 0;  //Initialize variables
-  adult = 0, children = 0;
-  char j;
-  cout << "Filename: ";
+  //Gather input
+  string file; 
+  cout << "Enter a filename: ";
   cin >> file;
   ifstream fin(file);
 
-  //Use loop to sort through all data in file
-  while(fin){
-    cin >> junk >> m >> j >> d >> j >> y;
-
-    if(y >= 21){
-      adult = adult + 1;
-    }
-    else if (y == 0 && m >= 9 && d >= 27){ 
-      adult = adult + 1;
-    }
-      else 
-        children = children + 1;
+  //Check that filename is valid
+  if (!fin){
+    cout << "Invalid filename" << endl;
+    return 1;
   }
-  //Output 
-  cout << adult << " adults and " << children << " children" << endl;
-  return 0;
-}
 
+  //Data processing
+  int row1 = 0, row2 = 0, c = 0;  //c = current
+  while (fin >> c){
+    if (c > 19)
+      row2++;
+    else 
+      row1++;
+  }
+
+  //Draw histogram
+  cout << "[10,19]: ";
+  while (row1 > 0){
+    cout << "*";
+    row1--;
+  }
+  cout << "\n[20,29]: ";
+  while (row2 > 0){
+    cout << "*";
+    row2--;
+  }
+}
 

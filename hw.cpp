@@ -34,7 +34,6 @@ int main()
   }
   //Output 
   cout << adult << " adults and " << children << " children" << endl;
-  return 0;
 }
 
 

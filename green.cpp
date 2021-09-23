@@ -21,17 +21,16 @@ int main ()
   ifstream fin2(back);
   ofstream fout(out);
 
-  if (!fin1 && !fin2){  //Check that file can be read
+  if (!fin1 || !fin2){  //Check that files can be read
     cout << "Error: Input file not found" << endl;
     return 1;
   }
 
-  //Read the file
+  //Read the files
   string header;
   int w, h, max, v, h2, w2, max2;
   int row = 0, col = 0;  //Row and column
   int r = 0, g = 0, b = 0, r2 = 0, g2 = 0, b2 = 0;
-  double avg = 0;  //Used in grayscale calculations
   fin1 >> header >> w >> h >> max;  //Read unique values separately
   fin2 >> header >> w2 >> h2 >> max2;  //Read info for background img
 
@@ -47,13 +46,13 @@ int main ()
     //Cycle through each row
     while (row < h){
       if (col < w){  //For each row, work through each column one by one
-      fin1 >> r >> g >> b;
-      //Change values to grayscale variants
-      avg = (r + g + b)/3;
-      r = avg, g = avg, b = avg;
-
-      fout << r << " " << g << " " << b << " ";
-      col++;
+        fin1 >> r >> g >> b;
+        fin2 >> r2 >> g2 >> b2;
+        if (r == 0 && g == 255 && b ==0)  //Green background
+          fout << r2 << " " << g2 << " " << b2 << " ";
+        else  //Output non-green image
+          fout << r << " " << g << " " << b << " ";
+        col++;
       }
       else {  //When each row finishes, reset col and advance row
         col = 0;

@@ -29,37 +29,22 @@ int main ()
     return 1;
   }
 
-  //Read the files
+ //Read the files
   string header;
   int w, h, max, v, h2, w2, max2;
-  int row = 0, row2=0, col = 0, col2=0;  //Row and column for both images
+  int row = 0, col = 0;  //Row and column
   int r = 0, g = 0, b = 0, r2 = 0, g2 = 0, b2 = 0;
   fin1 >> header >> w >> h >> max;  //Read unique values separately
   fin2 >> header >> w2 >> h2 >> max2;  //Read info for background img
 
-  //Outputs file header
-  fout << header << endl << w2 << " " << h2 << endl << max2 << endl;
-  
-  //Apply rowshift in reading of first file
-/*  for(int i = 0; i < rs; i++){
-    while (row2 < rs){
-      if (col2 < w2){
-        fin2 >> r2 >> g2 >> b2;
-        fout << r2 << g2 << b2;
-        //if (r != 0 || g != 255 || b != 0){  //Check that image fits
-         // cout << "Error: The foreground goes past the background";
-         // exit(1);
-        //}
-        col2++;
-      }
-      else {
-        col2 = 0;
-        row2++;
-      }
-    }
-    cout << i << endl;
+  //Check that images are the same size
+  if (w != w2 && h != h2){
+    cout << "Error: Images have different sizes";
+    return 1;
   }
-*/
+  //Outputs file header
+  fout << header << endl << w << " " << h << endl << max << endl;
+  
   while (fin1){
     //Cycle through each row
     while (row < h){
@@ -71,41 +56,13 @@ int main ()
         else  //Output non-green image
           fout << r << " " << g << " " << b << " ";
         col++;
-        col2++;
-        cout << '2';
       }
-
-      //When each row finishes, reset col and advance row
-      else while (col2 < w2){  //Finish reading background image for each row
-        fin2 >> r2 >> g2 >> b2;
-        fout << r2 << g2 << b2;
-        col2++;
-        cout << '3';
-      }
-      if(col2 ==  w2){
-        col2 = 0;
-        row2++;
-      }  
-      col = 0;
-      row++;
-    }
-  }
-
-  while (fin2){ //output the rest of the background image
-    while (row2 < h2){
-      if (col2 < w2){
-        fin2 >> r2 >> g2 >> b2;
-        fout << r2 << g2 << b2; 
-        cout << "I'm here" << endl;
-        col++;
-      }
-      else {
-        col2 = 0;
-        row2++;
+      else {  //When each row finishes, reset col and advance row
+        col = 0;
+        row++;
       }
     }
+    cout << "Image saved to " << out << endl;
+    return 0;
   }
-
-  cout << "Image saved to " << out << endl;
-  return 0;
 }

@@ -5,8 +5,8 @@ using namespace std;
 
 // TO DO: Give function prototypes
 void get_names (string* x, string* y);
-bool update_counts (string selection);
-
+bool update_counts (string s, string x, int* c1, string y, int* c2);
+void display_results (string x, int c1, string y, int c2);
 
 
 
@@ -40,13 +40,29 @@ int main()
 void get_names(string* x, string* y){
   cout << "Candidate names: ";
   cin >> *x >> *y;
-  exit(0);
 }
 bool update_counts(string s, string x, int* c1, string y, int* c2){
   if (s == "END")
     return false;
   else if (s == x){
-    (*c1)++;
+    *c1 += 1;
+    return true;
+  }
+  else if (s == y){
+    *c2 += 1;
+    return true;
+  }
+  else {
+    cout << "Invalid name" << endl;
+    return true;
   }
 }
-
+void display_results (string x, int c1, string y, int c2){
+  int tot = c1 + c2;
+  if (c1 > c2)
+    cout << x << " wins with " << c1 << " out of " << tot << " votes" << endl;
+  else if (c2 > c1)
+    cout << y << " wins with " << c2 << " out of " << tot << " votes" << endl;
+  else
+    cout << "Tie!" << endl;
+}

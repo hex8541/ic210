@@ -12,6 +12,7 @@ string mkShadowString(string s);  //creates string entirely of underscores
 //uncovers all occurences of a character in a shadowed string
 string uncover(string original, string covered, char c);
 string crossOut(char c, string s);  //removes character from list of alphabet
+void printHangMan(int gr);  //Prints image of hangman
 
 int main()
 {
@@ -48,7 +49,7 @@ int main()
     else 
       progress = uncover(word, progress, guess);
     options = crossOut(guess, options);
-    
+    printHangMan(gr);
     //determine if end conditions met
     if (gr == 0)
       cout << "You lose!!!! The word was " << word << endl;
@@ -111,4 +112,38 @@ string crossOut(char c, string s)  //same process as previous function, just *
       out[i] = '*';
   }
   return out;
+}
+
+void printHangMan(int gr)  //Contains strings to print per guesses remaining
+{
+  cout << "  ____ \n";  //Always printed
+  if (gr < 8)  //first part to appear
+    cout << "  |   |\n";
+  else  //Alternate in case guesses haven't been used
+    cout << "      |\n";
+
+  if (gr < 5)  //produces line with head
+    cout << " _0_  |\n";
+  else if (gr < 6)
+    cout << "  0_  |\n";
+  else if (gr < 7)
+    cout << "  0   |\n";
+  else 
+    cout << "      |\n";
+
+  if (gr < 4)  //Produces middle of torso
+    cout << "  |   |\n";
+  else 
+    cout << "      |\n";
+
+  if (gr == 0)   //produces legs
+    cout << " / \\\\ |\n";
+  else if (gr < 2)
+    cout << " / \\  |\n";
+  else if (gr < 3)
+    cout << " /    |\n";
+  else 
+    cout << "      |\n";
+
+  cout << "______|_\n";  //print final line
 }

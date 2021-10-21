@@ -1,7 +1,6 @@
 //Nicholas Heil 242628
 //Process commands involving integers in arrays
 #include <iostream>
-#include <string>
 using namespace std;
 
 // ======================================
@@ -43,15 +42,14 @@ int main()
 // ======================================
 int readN()  //Sorts through input to find array size and returns this value
 {
+  cout << "N = ";
   int out;
-  char j;
-  cin >> j >> j >> out;
+  cin >> out;
   return out;
 }
 int* readData(int n)
 {
-  string j;  //gets rid of numbers:
-  cin >> j;
+  cout << "Numbers: ";
   int* data = new int[n];  
   for (int i = 0; i < n; i++)
     cin >> data[i];

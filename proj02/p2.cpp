@@ -1,5 +1,5 @@
 //Nicholas Heil 242628
-//Printing out a deck of cards
+//Simulate dealing cards
 
 #include <iostream>
 

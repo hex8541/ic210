@@ -1,5 +1,5 @@
 //Nicholas Heil 242628
-//Simulate dealing with hit/stand options
+//Shuffling a deck of cards
 
 #include <iostream>
 #include <string>

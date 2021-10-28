@@ -1,5 +1,5 @@
 //Nicholas Heil 242628
-//Shuffling a deck of cards
+//Play with aesthetics: vertically printed hands, deck not printed, and suits
 
 #include <iostream>
 #include <string>
@@ -11,6 +11,7 @@ void deal(int* hand, int& hN, int* deck, int& card); //Deals 1 card to desired h
 void printHands(int* player, int* dealer, int PC, int DC);  //Prints the Player and Dealer's current hands
 bool HitStand(int round, string P);  //Asks player or dealer to hit or stand
 void shuffle(int* deck);  //Shuffles the deck
+void Card(int* hand, int i);  //Returns card value to be printed
 
 int main()
 {
@@ -40,15 +41,6 @@ int main()
     shuffle(deck);  //Shuffles deck
   }
 
-  //Output deck
-  cout << "[";
-  for(int i=0; i < 52; i++){
-    cout << deck[i];
-    if (i < 51) 
-      cout << " ";  //Add space for most of output
-    else 
-      cout << "]" << endl;  //Close deck if at end
-  }
   
   //Create arrays for hands knowing max hand size is five cards
   int* player = new int[5];
@@ -80,6 +72,7 @@ int main()
     else
     printHands(player, dealer, PC, DC);
   }
+
   //Delete arrays
   delete [] deck;
   delete [] player;
@@ -97,27 +90,62 @@ void deal(int* hand, int& hN, int* deck, int& card) //Deals 1 card to desired ha
 
 void printHands(int* player, int* dealer, int PC, int DC)  //Prints the Player and Dealer's current hands
 {
-  //output player's hand based on number of cards dealt to player
-  cout << "Player: [";
-  for(int i = 0; i < PC; i++){
-    cout << player[i];
-    if(i < PC-1)
-      cout << " ";  //Add spaces between cards in hand
-    else 
-      cout << "]" << endl;  //Close out hand
+    
+  //Initializes a max index for the for loop
+  int max = PC;
+  if (max < DC)
+    max = DC;
+  
+  cout << "\n Player Dealer " << endl;
+  //Outputs hands line by line
+  for (int i = 0; i < max; i++){
+    cout << "| ";
+    Card(player, i);
+    cout << "  | ";
+    Card(dealer, i);
+    cout << "  |";
+    cout << endl;
   }
-  //output dealer's hand based on number of cards dealt to dealer
-  cout << "Dealer: [";
-  for(int i = 0; i < DC; i++){
-    cout << dealer[i];
-    if(i < DC-1)
-      cout << " ";
-    else
-      cout << "]" << endl;
-  }
-  cout << "\n"; //separates from next thing to be outputted
 }
 
+void Card(int* hand, int i)  //Outputs value of a card
+{
+  //Initialize strings for suits
+  string club = "\u2663";  //100 series
+  string diamond = "\u2666";  //200 series
+  string heart = "\u2665";  //300 series
+  string spade = "\u2660";  //400 series
+
+  //If player doesn't have a card, output spaces
+  if(hand[i] == 0)
+    cout << "   ";
+  else{ 
+    string card;
+    int cardV = hand[i]%100;
+    if (cardV == 10)  //if card value is 10 skip extra space
+      card = "10";
+    else if (cardV == 11)  //Jack
+      card = " J"; 
+    else if (cardV == 12)  //Queen
+      card = " Q";
+    else if (cardV == 13)  //King
+      card = " K";
+    else if (cardV == 14)  //Ace
+      card = " A";
+    else 
+      cout << " " << hand[i]%100;
+    //Check suit value and add to card string
+    if(hand[i]/100 == 1) 
+      card = card + club;
+    else if(hand[i]/100 == 4)
+      card = card + spade;
+    else if(hand[i]/100 == 2)
+      card = card + diamond;
+    else
+      card = card + heart;
+    cout << card;
+  }
+}
 
 bool HitStand(int round, string P)  //Asks player or dealer to hit/stand
 {
@@ -142,3 +170,4 @@ void shuffle(int* deck)  //Shuffles the deck
     deck[j] = temp;
   }
 }
+

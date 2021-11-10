@@ -1,79 +1,80 @@
 //Nicholas Heil 242628
+//Read in names and scores, then print out the high score for each name
 
-#include <iostream>
 #include <string>
+#include <iostream>
 #include <fstream>
 
 using namespace std;
 
-struct Section{
-  string course, schedule;
-  int number;
+struct game{
+  string fname, lname;
+  int score;
 };
 
-void searchByCourse(Section* sections, int n);
-void searchBySection(Section* sections, int n);
-Section* read(istream* pin, int* pn);
+void selection_sort(game* A, int n);
+bool before(game a, game b);
 
 int main()
 {
+  //Gather input
   string fname;
   cout << "Filename: ";
   cin >> fname;
   ifstream fin(fname);
+  int size;
+  fin >> size;
+  game* Scores = new game[size];
+  for(int i=0; i < size; i++) //Read into the array of scores
+    fin >> Scores[i].fname >> Scores[i].lname >> Scores[i].score;
 
-  int n;
-  Section* sections = read(&fin, &n);
+  //sort 
+  selection_sort(Scores, size);
 
-  string cmd;
-  cout << "> ";
-  while( (cin >> cmd) && (cmd != "quit") )
-  {
-    if( cmd == "course" )
-      searchByCourse(sections, n);
-    else if ( cmd == "section" )
-      searchBySection(sections, n);
-
-    cout << endl << "> ";
+  //Output high scores for each player
+  string first, last;//initialize with last name in list so first won't match
+  first = Scores[size-1].fname;
+  last = Scores[size-1].lname;
+  for(int i=0; i < size; i++){
+    //output if this is the first appearance of the name & move to next
+    if(first != Scores[i].fname || last != Scores[i].lname){
+      cout << Scores[i].fname << " " << Scores[i].lname << " " 
+        << Scores[i].score << endl;
+      first = Scores[i].fname;
+      last = Scores[i].lname;
+    }
+    else{ //move to next saved score
+      first = Scores[i].fname;
+      last = Scores[i].lname;
+    }
   }
 
-
-  delete [] sections;
+  //End run, delete array
+  delete [] Scores;
   return 0;
 }
 
-Section* read(istream* pin, int* pn)
-{
-  char j;
-  *pin >> j >> j >> *pn; //Read in number of sections to main function
-  Section* current = new Section[*pn];
-  for(int i=0; i < *pn; i++){ //read in each element in order
-    *pin >> current[i].course >> current[i].number >> current[i].schedule;
-  }
-  return current;  //returns the pointer to the array
-}
-
-void searchByCourse(Section* sections, int n)
-{
-  string search;
-  cin >> search;
-  for(int i=0; i < n; i++){
-    if(sections[i].course == search){
-      cout << sections[i].course << " " <<  sections[i].number << " "
-        << sections[i].schedule << endl;
+void selection_sort(game* A, int n) {//modified for games
+  for (int i = 0; i < n - 1; ++i) {
+    // find nexti, the index of the next element
+    int nexti = i;
+    for (int j = i + 1; j < n; ++j) {
+      if (before(A[j], A[nexti])) {
+        nexti = j;
+      }
     }
+    // swap A[i] and A[nexti]
+    game temp = A[i];
+    A[i] = A[nexti];
+    A[nexti] = temp;
   }
 }
 
-void searchBySection(Section* sections, int n)
-{
-  int search;
-  cin >> search;
-  for(int i=0; i < n; i++){
-    if(sections[i].number == search){
-      cout << sections[i].course << " " << sections[i].number << " "
-        << sections[i].schedule << endl;
-    }
-  }
-
+bool before(game a, game b){ //sort primarily by last name
+  if(a.lname == b.lname && a.fname == b.fname)
+    return a.score > b.score; //sort by score for same person (highest first)
+  else if(a.lname == b.lname)
+    return a.fname < b.fname; //sort by first name
+  else
+    return a.lname < b.lname; //sort by last name
 }

@@ -1,0 +1,14 @@
+12 students
+10 homeworks
+Benjamin Adams	58	96	65	72	93	67	59	74	95	56
+Thomas Brown	96	67	56	74	94	100	98	68	95	65
+Julie Jones	88	81	94	59	95	65	98	88	93	82
+Aaron Landau	76	97	88	69	64	94	54	75	83	65
+Jake McCrary	89	52	90	67	56	90	95	63	51	58
+Edward Needham	89	52	90	67	56	90	95	63	52	57
+John Poe	90	51	90	67	56	90	95	63	52	57
+Jason Rafter	96	66	58	71	87	59	81	78	69	77
+Andy Smith	97	65	63	89	69	84	51	78	68	55
+Rebecca Wright	76	85	77	95	87	72	64	62	55	51
+Caitlyn Zoom	67	45	83	38	88	45	23	78	30	82
+Don Needham	89	52	90	67	56	91	94	63	52	57

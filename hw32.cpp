@@ -31,9 +31,9 @@ int main()
   cin >> l; 
 
   //Output words starting with letter
-  while(Node* current = List; current != NULL; current = current->next;){
+  for(Node* current = List; current != NULL; current = current->next){
     if(current->word[0] == l)
-      cout << current->word; //if first letter matches, output word
+      cout << current->word << endl; //if first letter matches, output word
   }
 
   return 0;

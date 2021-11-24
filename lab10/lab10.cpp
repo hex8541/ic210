@@ -6,7 +6,6 @@
 #include <fstream>
 #include "lab10.h"
 
-Node* tC = new Node; //the Current
 void outNode(Node* List){
   cout << "(" << List->WV.word << " " << List->WV.value << ") ";
 }

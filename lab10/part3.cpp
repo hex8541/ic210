@@ -6,6 +6,8 @@
 
 int main()
 {
+  Node* tC = new Node; 
+  //the Current //
   //Read in a file and open ifstream
   string file;
   cout << "Input file is: ";

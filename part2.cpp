@@ -28,7 +28,6 @@ int main()
   // Declare strings to hold the info for each episode
   string title, url, date;
   //Declarations for date assessment
-  istringstream DATE(date); //use istringstream to harvest from date string
   time_t tearly = 0;
   time_t tlate = 0;
 
@@ -38,6 +37,7 @@ int main()
     title = episode_title(rss);
     date = episode_date(rss);
     url = episode_url(rss);
+    istringstream DATE(date); //use istringstream to harvest from date string
 
     //Convert date to a tm object
     tm curr = {}; 
@@ -53,11 +53,12 @@ int main()
     time_t tcurr = mktime(&curr);
     if(tearly == 0 || tcurr < tearly) //if tearly isn't assigned or is newer 
       tearly = tcurr;
-    else if(tlate == 0 || tcurr > tlate) //if tlate isn't assigned or is older
+    if(tlate == 0 || tcurr > tlate) //if tlate isn't assigned or is older
       tlate = tcurr;
   }
+
   //Process out difference in time
-  double diff = difftime(tearly, tlate);
+  double diff = difftime(tlate, tearly);
   int d, h, m, s; //day, hour, minute, second
   int r; //remaining
   int i = int(diff); //convert diff to integer for calculations
@@ -69,7 +70,6 @@ int main()
   s = r%60;
   cout << d << " days " << h << " hours " << m << " minutes " 
     << s << " seconds" << endl;
-
 
   // It's always good to clean up after yourself.
   close_rss(rss);

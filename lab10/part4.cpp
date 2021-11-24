@@ -2,7 +2,8 @@
 //create a linked list of word/value pairs
 
 #include "lab10.h"
-#include "lab10.cpp"
+#include <iostream>
+#include <fstream>
 
 int main()
 {
@@ -23,6 +24,7 @@ int main()
   //Define necessary lists
   Node* List = new Node;
   Node* prev = new Node;
+  Node* tC = new Node; //the Current;
 
   while(fin >> j){
     fin >> current >> curr >> j;
@@ -32,7 +34,7 @@ int main()
   tC = List; 
   char con = 'a';
   while(con && length(tC)-1 > 0)
-    con = printstep(tC, prev);
+    con = printstep(tC, List, prev);
   //Final output
   cout << "List is: ";
   outList(prev);

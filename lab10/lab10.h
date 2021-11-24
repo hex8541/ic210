@@ -4,8 +4,10 @@
 #ifndef LAB10_HEADER
 #define LAB10_HEADER
 
-using namespace std;
 #include <string>
+
+using namespace std;
+
 struct Pair{
   string word;
   int value;

@@ -1,12 +1,9 @@
 //Nicholas Heil 242628
 //Definitions for functions
-#ifndef LAB10
-#define LAB10
+#include "lab10.h"
 #include <iostream>
 #include <fstream>
-#include "lab10.h"
 
-Node* tC = new Node; //the Current
 void outNode(Node* List){
   cout << "(" << List->WV.word << " " << List->WV.value << ") ";
 }
@@ -26,11 +23,11 @@ int length(Node* List){ //function finds number of terms in a linked list
   return count;
 }
 
-Node* findlast(Node* L)  //When youcall this function, make sure L is not NULL
+Node* findlast(Node* L)  //When you call this function, make sure L is not NULL
 {
   if( L == NULL )
   {
-    cerr << "error!" << endl;
+    cout << "error!" << endl;
     exit(1);
   }
   for(Node* p = L; p != NULL; p = p->next)
@@ -58,7 +55,7 @@ Node* add2back(Pair val, Node* List){
 char printstep(Node* List, Node* prev){
   //Output current node
   cout << "The current node: ";
-  outNode(tC);
+  outNode(List);
   cout << endl;
   //Output previous nodes
   cout << "Nodes before the current: ";
@@ -66,12 +63,12 @@ char printstep(Node* List, Node* prev){
     outNode(temp);
   cout << endl;
   //Output number of nodes left, a/r and cin input
-  cout << "#nodes after the current: " << length(tC->next)-1 << endl;
+  cout << "#nodes after the current: " << length(List->next)-1 << endl;
   cout << "[a]ccept or [r]eject: ";
   char ans;
-  cin >> ans;
   prev = add2back(List->WV, prev); //add to previous list
-  tC = List->next; //increment the list
+  List = List->next; //increment the list
+  cin >> ans;
   return ans;
 }
 
@@ -87,4 +84,3 @@ int Score(Node* List){
     tot = tot + t->WV.value; 
   return tot;
 }
-#endif

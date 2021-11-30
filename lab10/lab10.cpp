@@ -1,11 +1,10 @@
 //Nicholas Heil 242628
 //Definitions for functions
-#ifndef LAB10
-#define LAB10
 #include <iostream>
 #include <fstream>
 #include "lab10.h"
 
+Node* tC = new Node;
 void outNode(Node* List){
   cout << "(" << List->WV.word << " " << List->WV.value << ") ";
 }
@@ -57,7 +56,7 @@ Node* add2back(Pair val, Node* List){
 char printstep(Node* List, Node* prev){
   //Output current node
   cout << "The current node: ";
-  outNode(tC);
+  outNode(List);
   cout << endl;
   //Output previous nodes
   cout << "Nodes before the current: ";
@@ -65,12 +64,11 @@ char printstep(Node* List, Node* prev){
     outNode(temp);
   cout << endl;
   //Output number of nodes left, a/r and cin input
-  cout << "#nodes after the current: " << length(tC->next)-1 << endl;
+  cout << "#nodes after the current: " << length(List->next)-1 << endl;
   cout << "[a]ccept or [r]eject: ";
   char ans;
   cin >> ans;
   prev = add2back(List->WV, prev); //add to previous list
-  tC = List->next; //increment the list
   return ans;
 }
 
@@ -86,4 +84,22 @@ int Score(Node* List){
     tot = tot + t->WV.value; 
   return tot;
 }
-#endif
+
+char print5Step(Node* List, Node* prev){
+  //Output current node
+  cout << "\nThe current node: ";
+  outNode(List);
+  cout << endl;
+  //Output sentence saved so far
+  cout << "Sentence you made so far: ";
+  outList(prev);
+  //Output number of words left, a/r and cin input
+  cout << "#words left: " << length(List->next)-1 << endl;
+  cout << "[a]ccept or [r]eject: ";
+  char ans;
+  cin >> ans;
+  if(ans == 'a')  //accept word
+    prev = add2back(List->WV, prev); //add to previous list
+  return ans;
+}
+

@@ -2,12 +2,11 @@
 //create a linked list of word/value pairs
 
 #include "lab10.h"
-#include "lab10.cpp"
+#include <iostream>
+#include <fstream>
 
 int main()
 {
-  Node* tC = new Node; 
-  //the Current //
   //Read in a file and open ifstream
   string file;
   cout << "Input file is: ";
@@ -25,17 +24,24 @@ int main()
   //Define necessary lists
   Node* List = new Node;
   Node* prev = new Node;
-
+  Node* tC = new Node; //the Current
   while(fin >> j){
     fin >> current >> curr >> j;
     List = add2front(current, curr, List);
   }
+
+  //Print steps and iterate through list
   tC = List; 
   char con = 'a';
-  while(con && length(tC)-1 > 0)
+  while(con && length(tC)-1 > 0){
     con = printstep(tC, prev);
+    tC = tC->next;
+  }
+
+  //final output
   cout << "List is: ";
   for(Node* t = prev->next; t != NULL; t = t->next)
     outNode(t);
+
   return 0;
 }

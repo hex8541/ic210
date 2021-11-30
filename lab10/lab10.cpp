@@ -1,8 +1,11 @@
 //Nicholas Heil 242628
 //Definitions for functions
+<<<<<<< HEAD
+=======
+#include "lab10.h"
+>>>>>>> a84cfdbca973e1395af76d677eb75f632d08906c
 #include <iostream>
 #include <fstream>
-#include "lab10.h"
 
 Node* tC = new Node;
 void outNode(Node* List){
@@ -24,11 +27,11 @@ int length(Node* List){ //function finds number of terms in a linked list
   return count;
 }
 
-Node* findlast(Node* L)  //When youcall this function, make sure L is not NULL
+Node* findlast(Node* L)  //When you call this function, make sure L is not NULL
 {
   if( L == NULL )
   {
-    cerr << "error!" << endl;
+    cout << "error!" << endl;
     exit(1);
   }
   for(Node* p = L; p != NULL; p = p->next)
@@ -67,8 +70,12 @@ char printstep(Node* List, Node* prev){
   cout << "#nodes after the current: " << length(List->next)-1 << endl;
   cout << "[a]ccept or [r]eject: ";
   char ans;
-  cin >> ans;
   prev = add2back(List->WV, prev); //add to previous list
+<<<<<<< HEAD
+=======
+  List = List->next; //increment the list
+  cin >> ans;
+>>>>>>> a84cfdbca973e1395af76d677eb75f632d08906c
   return ans;
 }
 
@@ -84,6 +91,7 @@ int Score(Node* List){
     tot = tot + t->WV.value; 
   return tot;
 }
+<<<<<<< HEAD
 
 char print5Step(Node* List, Node* prev){
   //Output current node
@@ -103,3 +111,5 @@ char print5Step(Node* List, Node* prev){
   return ans;
 }
 
+=======
+>>>>>>> a84cfdbca973e1395af76d677eb75f632d08906c

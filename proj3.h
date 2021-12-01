@@ -3,11 +3,9 @@
 #ifndef PROJ3_HEADER
 #define PROJ3_HEADER
 
-#include <ctime> //for time comparisons
 #include <string>
 #include <fstream>
 #include <iostream>
-using namespace std;
 
 struct Waypoint{
   double lat, lon;

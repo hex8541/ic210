@@ -3,8 +3,8 @@
  * This is where you will write your main() for the entire project.
  */
 
-#include "gps.cpp"
-#include "proj3.cpp"
+#include "gps.h"
+#include "proj3.h"
 
 int main()
 {

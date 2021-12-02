@@ -1,9 +1,13 @@
 //Nicholas Heil 242628
 //Definitions for functions
+<<<<<<< HEAD
+=======
 #include "lab10.h"
+>>>>>>> a84cfdbca973e1395af76d677eb75f632d08906c
 #include <iostream>
 #include <fstream>
 
+Node* tC = new Node;
 void outNode(Node* List){
   cout << "(" << List->WV.word << " " << List->WV.value << ") ";
 }
@@ -67,8 +71,11 @@ char printstep(Node* List, Node* prev){
   cout << "[a]ccept or [r]eject: ";
   char ans;
   prev = add2back(List->WV, prev); //add to previous list
+<<<<<<< HEAD
+=======
   List = List->next; //increment the list
   cin >> ans;
+>>>>>>> a84cfdbca973e1395af76d677eb75f632d08906c
   return ans;
 }
 
@@ -84,3 +91,25 @@ int Score(Node* List){
     tot = tot + t->WV.value; 
   return tot;
 }
+<<<<<<< HEAD
+
+char print5Step(Node* List, Node* prev){
+  //Output current node
+  cout << "\nThe current node: ";
+  outNode(List);
+  cout << endl;
+  //Output sentence saved so far
+  cout << "Sentence you made so far: ";
+  outList(prev);
+  //Output number of words left, a/r and cin input
+  cout << "#words left: " << length(List->next)-1 << endl;
+  cout << "[a]ccept or [r]eject: ";
+  char ans;
+  cin >> ans;
+  if(ans == 'a')  //accept word
+    prev = add2back(List->WV, prev); //add to previous list
+  return ans;
+}
+
+=======
+>>>>>>> a84cfdbca973e1395af76d677eb75f632d08906c

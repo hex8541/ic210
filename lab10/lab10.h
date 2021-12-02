@@ -26,5 +26,6 @@ Node* add2front(string word, int val, Node* List);
 Node* findlast(Node* L);
 int length(Node* List);
 char printstep(Node* List, Node* prev); //prints each step and gather a/r input
+char print5Step(Node* List, Node* prev); //modifies printstep for part 5
 
 #endif

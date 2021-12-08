@@ -6,14 +6,14 @@
 #include <string.h>
 
 struct Node {
-  char* word;
+  char word[128];
   struct Node* next;
 };
 
 // Adds to the front!
 struct Node* add2front(char* val, struct Node* L) {
   struct Node* T = malloc(sizeof(struct Node));
-  T->word = val;
+  strcpy(T->word, val);
   T->next = L;
   return T;
 }
@@ -34,18 +34,18 @@ int main() {
   struct Node* mylist = NULL;
   char word[20];
   printf("Enter words followed by END: ");
-  scanf("%s", word);
-  while( strcmp(word, "END") == 0 ) {
+  while(scanf("%s", word) && strcmp(word, "END") != 0 ) {
     mylist = add2front(word, mylist);
-    scanf("%s", word);
   }
-  
+
   //Ask for and search for letter
   char term;
   printf("What letter? ");
-  scanf("%c", &term);
-  printf("%c", term);
-  printList(mylist);
+  scanf(" %c", &term);
+  for(struct Node* temp = mylist; temp != NULL; temp = temp->next){
+    if(temp->word[0] == term)
+      printf("%s\n", temp->word);
+  }
 
   return 0;
 }
